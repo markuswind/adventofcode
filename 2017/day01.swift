@@ -8,7 +8,7 @@ class Day01 {
 
   // MARK: - Static properties
 
-  static let puzzleInput = "1212"
+  static let puzzleInput = "123123"
 
   // MARK: - Properties
 
@@ -17,18 +17,44 @@ class Day01 {
   // MARK: - Main method
 
   func main() {
-    print(calculateAwnser())
+    print("Part One:")
+    print(calculatePartOneAwnser())
+    print("Part Two:")
+    print(calculatePartTwoAwnser())
   }
 
   // MARK: - Puzzle methods
 
-  private func calculateAwnser() -> Int {
+  private func calculatePartOneAwnser() -> Int {
     var awnser = 0
+
     let lastNumberIndex = numberArray.count - 1
 
     for index in 0...lastNumberIndex {
       let number = numberArray[index]
       let rightIndex = (index == lastNumberIndex) ? 0 : index + 1
+
+      if number == numberArray[rightIndex] {
+        awnser += number
+      }
+    }
+
+    return awnser
+  }
+
+  private func calculatePartTwoAwnser() -> Int {
+    var awnser = 0
+
+    let lastNumberIndex = numberArray.count - 1
+    let numberOfSteps = numberArray.count / 2
+
+    for index in 0...lastNumberIndex {
+      let number = numberArray[index]
+      var rightIndex = index + numberOfSteps
+
+      if rightIndex > lastNumberIndex {
+        rightIndex -= numberArray.count
+      }
 
       if number == numberArray[rightIndex] {
         awnser += number
