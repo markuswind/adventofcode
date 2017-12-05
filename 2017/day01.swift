@@ -23,7 +23,7 @@ class Day01 {
     print(calculatePartTwoAwnser())
   }
 
-  // MARK: - Puzzle methods
+  // MARK: - Part 1 methods
 
   private func calculatePartOneAwnser() -> Int {
     var awnser = 0
@@ -41,6 +41,8 @@ class Day01 {
 
     return awnser
   }
+
+  // MARK: - Part 2 methods
 
   private func calculatePartTwoAwnser() -> Int {
     var awnser = 0
