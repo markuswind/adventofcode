@@ -4,18 +4,18 @@ const fileName = "./input.txt";
 const inputFile = fs.readFileSync(fileName);
 
 const main = () => {
+  const inputLines = inputFile.toString().split(/^/m);
+
   const startTime = new Date();
   console.log("Calculating frequency...");
 
-  getFrequencyThatHasBeenHitTwice();
+  getFrequencyThatHasBeenHitTwice(inputLines);
 
   const endTime = new Date();
   console.log(`Done! (Finished in ${endTime - startTime} ms)`);
 };
 
-const getFrequencyThatHasBeenHitTwice = () => {
-  const instructions = inputFile.toString().split(/^/m);
-
+const getFrequencyThatHasBeenHitTwice = instructions => {
   let foundFrequency = false;
   let hitFrequencies = [0];
   let frequency = 0;

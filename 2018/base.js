@@ -4,17 +4,17 @@ const fileName = "";
 const inputFile = fs.readFileSync(fileName);
 
 const main = function() {
+  const inputLines = inputFile.toString().split(/^/m);
+
   const startTime = new Date();
   console.log("...");
 
-  readInputFile();
+  doStuff(inputLines);
 
   const endTime = new Date();
   console.log("Done! (Finished in " + (endTime - startTime) + "ms)");
 };
 
-const readInputFile = function() {
-  const lines = inputFile.toString().split("\n");
-};
+const doStuff = () => {};
 
 main();

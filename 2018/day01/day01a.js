@@ -4,17 +4,18 @@ const fileName = "./input.txt";
 const inputFile = fs.readFileSync(fileName);
 
 const main = () => {
+  const inputLines = inputFile.toString().split("\n");
+
   const startTime = new Date();
   console.log("Calculating frequency...");
 
-  calculateFrequency();
+  calculateFrequency(inputLines);
 
   const endTime = new Date();
   console.log(`Done! (Finished in ${endTime - startTime} ms)`);
 };
 
-const calculateFrequency = () => {
-  const instructions = inputFile.toString().split("\n");
+const calculateFrequency = instructions => {
   let frequency = 0;
 
   instructions.forEach(instruction => {
