@@ -7,52 +7,69 @@ const main = function() {
   const inputLines = inputFile.toString().split(/^/m);
 
   const startTime = new Date();
-  console.log("Calculating overlapping squares...");
-
-  calculateOverlappingSquares(inputLines);
+  console.log("Getting unique claim id...");
+  console.log(`Result: ${getUniqueClaimId(inputLines)}`);
 
   const endTime = new Date();
   console.log("Done! (Finished in " + (endTime - startTime) + "ms)");
 };
 
-const calculateOverlappingSquares = claims => {
-  let uniqueClaimId;
-  let canvas = {};
+const getUniqueClaimId = claims => {
+  const canvas = getFilledCanvas(claims);
 
-  for (var i = 0; i < 2; i++) {
-    for (claim of claims) {
-      let isOverlapping = false;
+  for (claim of claims) {
+    let isOverlapping = false;
 
-      const claimId = getClaimId(claim);
-      const { x, y } = getCoordinates(claim);
-      const { width, height } = getDimensions(claim);
+    const claimId = getClaimId(claim);
+    const { x, y } = getCoordinates(claim);
+    const { width, height } = getDimensions(claim);
 
-      for (let xBlock = 0; xBlock < width; xBlock++) {
-        const posX = xBlock + parseInt(x) + 1;
+    for (let xBlock = 0; xBlock < width; xBlock++) {
+      const posX = xBlock + parseInt(x) + 1;
 
-        for (let yBlock = 0; yBlock < height; yBlock++) {
-          const posY = yBlock + parseInt(y) + 1;
+      for (let yBlock = 0; yBlock < height; yBlock++) {
+        const posY = yBlock + parseInt(y) + 1;
 
-          if (!canvas[posX]) {
-            canvas[posX] = {};
-            canvas[posX][posY] = "unique";
-          } else if (!canvas[posX][posY]) {
-            canvas[posX][posY] = "unique";
-          } else if (i === 1 && canvas[posX][posY] === "notUnique") {
-            isOverlapping = true;
-          } else if (canvas[posX][posY] === "unique") {
-            canvas[posX][posY] = "notUnique";
-          }
+        if (canvas[posX][posY] === "notUnique") {
+          isOverlapping = true;
         }
       }
+    }
 
-      if (!isOverlapping) {
-        uniqueClaimId = claimId;
+    if (!isOverlapping) {
+      return claimId;
+    }
+  }
+
+  return;
+};
+
+const getFilledCanvas = claims => {
+  let canvas = {};
+
+  for (claim of claims) {
+    const { x, y } = getCoordinates(claim);
+    const { width, height } = getDimensions(claim);
+
+    for (let xBlock = 0; xBlock < width; xBlock++) {
+      const posX = xBlock + parseInt(x) + 1;
+
+      for (let yBlock = 0; yBlock < height; yBlock++) {
+        const posY = yBlock + parseInt(y) + 1;
+
+        if (!canvas[posX]) {
+          canvas[posX] = {};
+          canvas[posX][posY] = "unique";
+        } else if (!canvas[posX][posY]) {
+          canvas[posX][posY] = "unique";
+        } else if (canvas[posX][posY] === "unique") {
+          canvas[posX][posY] = "notUnique";
+        }
       }
     }
   }
 
-  console.log(`Result: ${uniqueClaimId}`);
+  return canvas;
 };
 
 const getClaimId = claim => {
