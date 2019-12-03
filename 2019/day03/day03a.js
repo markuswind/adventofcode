@@ -18,7 +18,7 @@ const main = () => {
 const calculateManhattenDistance = paths => {
   const wirePath1 = getWirePath(paths[0].split(","));
   const wirePath2 = getWirePath(paths[1].split(","));
-  const intersections = getInterctions(wirePath1, wirePath2);
+  const intersections = getIntersections(wirePath1, wirePath2);
 
   const distances = intersections.map(x => Math.abs(x.x) + Math.abs(x.y));
   const manhattenDistance = Math.min(...distances);
@@ -58,7 +58,7 @@ const getWirePath = instructions => {
   return wirePath.splice(1);
 };
 
-const getInterctions = (wirePath1, wirePath2) =>
+const getIntersections = (wirePath1, wirePath2) =>
   wirePath1.filter(p1 => wirePath2.find(p2 => p1.x === p2.x && p1.y === p2.y));
 
 main();
