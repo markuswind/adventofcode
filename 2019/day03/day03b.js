@@ -19,7 +19,7 @@ const calculateFewestCombinedSteps = paths => {
   const wirePath1 = getWirePath(paths[0].split(","));
   const wirePath2 = getWirePath(paths[1].split(","));
 
-  const intersectionSteps = getInterctionSteps(wirePath1, wirePath2);
+  const intersectionSteps = getIntersectionSteps(wirePath1, wirePath2);
   const fewestCombinedSteps = Math.min(...intersectionSteps);
 
   console.log(`Result: ${fewestCombinedSteps}`);
@@ -57,7 +57,7 @@ const getWirePath = instructions => {
   return wirePath.splice(1);
 };
 
-const getInterctionSteps = (wirePath1, wirePath2) => {
+const getIntersectionSteps = (wirePath1, wirePath2) => {
   const intersectionSteps = [];
 
   wirePath1.map((location1, index1) => {
