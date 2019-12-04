@@ -32,13 +32,9 @@ const calculatePasswordCount = range => {
         const nr = parseInt(passwordString[i]);
         const prevNr = parseInt(passwordString[i - 1]);
 
-        if (nr === prevNr) {
-          hasAdjacentDigits = true;
-        }
-
-        if (nr < prevNr) {
-          isNeverDecreasing = false;
-        }
+        if (nr === prevNr) hasAdjacentDigits = true;
+        if (nr < prevNr) isNeverDecreasing = false;
+        if (hasAdjacentDigits && !isNeverDecreasing) break;
       }
 
       if (hasAdjacentDigits && isNeverDecreasing) {
