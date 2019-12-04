@@ -34,7 +34,7 @@ const calculatePasswordCount = range => {
 
         if (nr === prevNr) hasAdjacentDigits = true;
         if (nr < prevNr) isNeverDecreasing = false;
-        if (hasAdjacentDigits && !isNeverDecreasing) break;
+        if (!isNeverDecreasing) break;
       }
 
       if (hasAdjacentDigits && isNeverDecreasing) {

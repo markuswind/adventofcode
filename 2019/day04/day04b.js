@@ -34,6 +34,7 @@ const calculatePasswordCount = range => {
 
         if (nr < prevNr) {
           isNeverDecreasing = false;
+          break;
         }
 
         if (nr === prevNr) {
